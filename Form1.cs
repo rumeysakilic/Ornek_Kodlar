@@ -1,4 +1,6 @@
-namespace HesappMakinesi
+using System.Xml.Linq;
+
+namespace HavaKartÄ±
 {
     public partial class Form1 : Form
     {
@@ -7,46 +9,14 @@ namespace HesappMakinesi
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
+            string api = "64f7b25e7843ab45d515204b1911e48b";
+            string connection = "https://api.openweathermap.org/data/2.5/weather?q=Samsun&appid=" + api;
+            XDocument weather = XDocument.Load(connection);
+            var sicaklik = weather.Descendants("temperature").ElementAt(0).Attribute("value").Value;
+            label4.Text = sicaklik.ToString();
 
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            int sayi1 = Convert.ToInt32(textBox1.Text);
-            int sayi2 = Convert.ToInt32(textBox2.Text);
-            int sonuc = sayi1 * sayi2;
-            label3.Text = sonuc.ToString();
-        }
-
-        private void SONUÇ_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Topla_Click(object sender, EventArgs e)
-        {
-            int sayi1 = Convert.ToInt32(textBox1.Text);
-            int sayi2 = Convert.ToInt32(textBox2.Text);
-            int sonuc = sayi1 + sayi2;
-            label3.Text = sonuc.ToString();
-        }
-
-        private void Çýkar_Click(object sender, EventArgs e)
-        {
-            int sayi1 = Convert.ToInt32(textBox1.Text);
-            int sayi2 = Convert.ToInt32(textBox2.Text);
-            int sonuc = sayi1 - sayi2;
-            label3.Text = sonuc.ToString();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            int sayi1 = Convert.ToInt32(textBox1.Text);
-            int sayi2 = Convert.ToInt32(textBox2.Text);
-            double sonuc = sayi1 / sayi2;
-            label3.Text = sonuc.ToString();
         }
     }
 }
